@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="ptop">
+                <div class="elem">
+                    <h2>Hit</h2>
+                    <div id="hitval" class="box2">5</div>
+                </div>
+                <div class="elem"> 
+                    <h2>Timer</h2>
+                    <div id="timerval" class="box2">60</div>
+                </div>
+                <div class="elem">
+                    <h2>Scores</h2>
+                    <div id="scoreval" class="box2">0</div>
+                </div>
+            </div>
+            <div class="pbott">
+                <div class="bubble">5</div>
+                
+
+            </div>
+        </div>
+    </div>
+    <script >
+         function makebubble(){
+            var clutter= "";
+for(var i=1; i<=170; i++){
+   
+    var rn=Math.floor(Math.random()*10);
+            clutter= clutter + ` <div class="bubble">${rn}</div>`;
+        
+        }
+        
+        document.querySelector(".pbott").innerHTML= clutter;
+    }
+var time=30;
+    function runtimer(){
+     var sett=setInterval(function() {
+        if(time>0){
+            time--;
+        document.querySelector("#timerval").textContent=time;
+        }
+        else{
+            clearInterval(sett);
+            document.querySelector(".pbott").innerHTML=`<H1>GAME OVER</H1>`;
+        }
+     
+     }, 1000);
+}
+var hitrn=0;
+function getnewhit(){
+hitrn=Math.floor(Math.random()*10);
+document.querySelector("#hitval").textContent=hitrn;
+}
+var score= 0;
+function incscores(){
+    score+=10;
+    document.querySelector("#scoreval").textContent=score;
+}
+ document.querySelector(".pbott").addEventListener("click",function(det){
+    var clickednum=(Number(det.target.textContent));
+    if(clickednum === hitrn){
+        incscores();
+        makebubble();
+        getnewhit();
+    }
+})
+makebubble();
+runtimer();
+getnewhit();
+let a='deeps';
+console.log(a)
+// incscores();
+</script>
+</body>
+</html>
